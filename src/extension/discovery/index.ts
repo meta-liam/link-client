@@ -9,7 +9,7 @@ function init(): string {
   return version;
 }
 
-function getNetList() {
+function getNetList():Array<string> {
   return [];
 }
 

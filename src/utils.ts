@@ -1,5 +1,5 @@
 
-export const wait = async (ms) => {
+export const wait = async (ms:number) => {
   let _wait = new Promise<boolean>((resolve) => {
     setTimeout(() => {
       resolve(true);

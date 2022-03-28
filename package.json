@@ -1,6 +1,6 @@
 {
     "name": "link-client",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "link-client:link pc,ios,android",
     "main": "dist/index.js",
     "scripts": {
@@ -15,7 +15,14 @@
     "dependencies": {
         "link-node": "^1.0.5"
     },
-    "keywords": ["link","app","demo","liam","meta","h5"],
+    "keywords": [
+        "link",
+        "app",
+        "demo",
+        "liam",
+        "meta",
+        "h5"
+    ],
     "author": "liam168520@gmain.com",
     "license": "MIT",
     "devDependencies": {

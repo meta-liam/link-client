@@ -1,28 +1,46 @@
 {
-    "compilerOptions": {
-        "moduleResolution": "node",
-        "lib": [
-			"dom",
-            "esnext"
-		],
-        "target": "es2015",
-        "rootDir": "./src",
-        "declaration": true,
-        "outDir": "dist",
-        "isolatedModules": false,
-        "declarationDir": "dist",
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-    },
-    "include": ["./src/**/*.ts"],
-    "exclude": [
-        "dist",
-        "**/test",
-        "__test__",
-        "__mock__",
-        "coverage",
-        "**/*.test.ts",
-        "**/*.test.js",
-        "**/*.spec.ts"
-    ]
+  "compilerOptions": {
+      "declaration": false,
+      "removeComments": true,
+      "rootDir": "./src",
+      "sourceMap": true,
+      "noUnusedParameters": true,
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "lib": [
+    "dom",
+          "esnext"
+  ],
+      "target": "es2015",
+      "baseUrl": "./",
+      "allowSyntheticDefaultImports": true,
+      "strict": false,
+      "forceConsistentCasingInFileNames": true,
+      "noImplicitReturns": true,
+      "noImplicitThis": true,
+      "noImplicitAny": false, // true
+      "strictNullChecks": false,
+      "suppressImplicitAnyIndexErrors": true,
+      "preserveConstEnums": true,
+      "module": "commonjs",
+      "outDir": "./dist"
+  },
+  "include": [
+      "src",
+      "README.md"
+    ],
+
+  "exclude": [
+      "**/__test__",
+      "**/__mocks__",
+      "/lib",
+      "/dist",
+      "test",
+      "mocks",
+      "coverage",
+      "example",
+      "**/*.test.ts",
+      "**/*.test.js",
+      "**/*.spec.ts"
+  ]
 }
