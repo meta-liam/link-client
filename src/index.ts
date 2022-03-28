@@ -1,7 +1,8 @@
 
 import { wait } from './utils'
 import { getChannel } from './channel'
-
+//const _client_global = require(`./extension/client-global/index`).default;
+import client_global from './extension/client-global/index'
 class LinkClient {
   channel: any = null;
   public handleServiceMessage: any = null;// 发回client的消息
@@ -36,9 +37,11 @@ class LinkClient {
   }
 
   getExtensionService = (name: string) => {
-    const sv = require(`./extension/${name}/index`);
-    if (!sv) return null;
-    return sv.default;
+    if (name == "client-global") return client_global
+    // const sv = require(`./extension/${name}/index`);
+    // if (!sv) return null;
+    // return sv.default;
+    else return null;
   }
 
   getServiceVersion = async (isWait: boolean = true) => {
