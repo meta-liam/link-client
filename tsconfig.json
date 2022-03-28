@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "lib": [
+			"dom",
+            "esnext"
+		],
+        "target": "es2015",
+        "rootDir": "./src",
+        "declaration": true,
+        "outDir": "dist",
+        "isolatedModules": false,
+        "declarationDir": "dist",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+    },
+    "include": ["./src/**/*.ts"],
+    "exclude": [
+        "dist",
+        "**/test",
+        "__test__",
+        "__mock__",
+        "coverage",
+        "**/*.test.ts",
+        "**/*.test.js",
+        "**/*.spec.ts"
+    ]
+}
