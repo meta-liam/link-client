@@ -13,7 +13,7 @@
         "README.md"
     ],
     "dependencies": {
-        "link-node": "^1.0.5"
+        "link-node": "^1.0.7"
     },
     "keywords": [
         "link",
