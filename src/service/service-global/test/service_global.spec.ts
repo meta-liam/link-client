@@ -5,7 +5,8 @@ import server from '../index'
 describe("service-global:all", () => {
   let client: LinkClient;
   beforeAll(async () => {
-    client = new LinkClient("localhost", 8888);
+    client = new LinkClient();
+    client.init('',8888)
     client.setHandle(_handle);
     client.channel.handleSend = _handleSend;
     await wait(40);

@@ -2,7 +2,7 @@ import { wait } from '../../utils';
 import { getChannel } from '../../channel'
 import sv from '../../service/service-global/index'
 
-const version = '1.0.1';
+const version = '1.0.0';
 let connected = false;
 
 const getVersion = (): string => {
@@ -20,7 +20,6 @@ const close = () => {
   getChannel().setHandle(null, "client-global");
 }
 
-// {"type":"data","data":{"jsonrpc":"2.0","method":"notifyMessage","params":{"type":"websocket.open","open":true},"client":"client-global"}}
 const _handle = (v: any) => {
   //console.log("[INFO][cli.ext.global._handle]:", v);
   if (!connected) connected = true;
@@ -30,7 +29,7 @@ const _handle = (v: any) => {
   }
 }
 
-// 处理服务端请求业务
+// 处理服务端主动请求业务
 const _notify = (v: any) => {
   console.log("[INFO][cli.ext.global.notify]:", v);
   if (v && v.method === "notifyMessage") {

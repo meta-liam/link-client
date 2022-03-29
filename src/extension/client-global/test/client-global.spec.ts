@@ -5,7 +5,8 @@ import server from '../index'
 describe("client-global:all",()=>{
   let client: LinkClient;
   beforeAll(async () => {
-    client = new LinkClient("localhost", 8888);
+    client = new LinkClient(false);
+    client.init('',8888);
     client.channel.setHandle(_handle,"test");
     client.channel.handleSend = _handleSend;
     await wait(40);
@@ -28,7 +29,7 @@ describe("client-global:all",()=>{
   it("getVersion", async () => {
     let r = server.getVersion();
     //console.log("sv.version::", r );
-    expect(r).toEqual('1.0.1')
+    expect(r).not.toEqual(null)
   });
 
   it("init", async () => {
@@ -44,6 +45,7 @@ describe("client-global:all",()=>{
     expect(_handleSend).toBeDefined();
   });
 
+  //// {"type":"data","data":{"jsonrpc":"2.0","method":"notifyMessage","params":{"type":"websocket.open","open":true},"client":"client-global"}}
   // it("_notify", async () => {
   //   let j =  {"jsonrpc":"2.0","method":"init","params":"","client":"client-global"}
   //   await wait(40)

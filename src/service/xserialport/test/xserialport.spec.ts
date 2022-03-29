@@ -5,7 +5,8 @@ import server from '../index'
 describe("xserialport:all",()=>{
   let client :LinkClient;
   beforeAll(async ()=>{
-    client = new LinkClient("localhost",8888);
+    client = new LinkClient(false);
+    client.init('',8888)
     await wait(40);
   });
 

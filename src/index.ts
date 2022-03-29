@@ -1,33 +1,39 @@
 
 import { wait } from './utils'
 import { getChannel } from './channel'
-//const _client_global = require(`./extension/client-global/index`).default;
-import client_global from './extension/client-global/index'
+//service
 import service_global from './service/service-global/index'
+//extension
+import client_global from './extension/client-global/index'
 import discovery from './extension/discovery/index'
 class LinkClient {
   channel: any = null;
   public handleServiceMessage: any = null;// 发回client的消息
   connected = false;
 
-  constructor(host: string = '', port: number = 0, autoInit: boolean = true) {
+  constructor(autoInit: boolean = true) {
     console.log("[INFO][cli.idx.constructor]");
     if (autoInit) {
-      this.init(host, port);
+      this.init();
     }
   }
 
   init = async (host: string = '', port: number = 0) => {
     console.log("[INFO][cli.idx.init]");
     this.channel = getChannel(this._handleMessage, host, port)
-    await wait(20);
+    await wait(50);
+    if (this.connected) client_global.init();
     return this.connected;
   }
 
   _handleMessage = (v: any) => {
-    //console.log("[INFO][cli._handleMessage]", v);
+    console.log("[INFO][cli._handleMessage]", v);
     if (this.handleServiceMessage) this.handleServiceMessage(v);
-    if(!this.connected)this.connected =true;
+    if (v && v.type == "data" && v.data && v.data.params && v.data.params.type == 'websocket.close') {
+      this.connected = false;
+    } else {
+      if (!this.connected) this.connected = true;
+    }
   };
 
   setHandle = (handle: any) => {
@@ -37,13 +43,19 @@ class LinkClient {
 
   close = () => {
     console.log("[INFO][cli.idx.close]");
-    this.channel.close();
+    if (this.connected && this.channel) this.channel.close();
+    this.connected = false;
+    this.handleServiceMessage = null;
   }
 
-  refresh = () => {
+  refresh = async () => {
     console.log("[INFO][cli.idx.refresh]");
-    this.close();
-    this.init();
+    this.channel.refresh();
+    //this.close();
+    // await wait(40);
+    //this.init();
+    await wait(80);
+    return this.connected;
   }
 
   getService = (name: string) => {
@@ -59,10 +71,6 @@ class LinkClient {
     // const sv = require(`./extension/${name}/index`);
     // if (sv) return sv.default;
     else return null;
-  }
-
-  getServiceVersion = async () => {
-    return await service_global.getVersion();
   }
 
 }
