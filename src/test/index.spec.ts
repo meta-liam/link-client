@@ -67,7 +67,7 @@ describe("LinkClient:all", () => {
     client.close();
     expect(client.connected).toEqual(false);
     console.log("client.connected 2:", client.connected);
-    await wait(50);
+    await wait(150);
   });
 
   it("refresh:all", async () => {

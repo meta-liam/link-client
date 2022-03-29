@@ -1,6 +1,6 @@
 
 import { wait } from './utils'
-import { getChannel } from './channel'
+import { getChannel,closeChannel } from './channel'
 //service
 import service_global from './service/service-global/index'
 //extension
@@ -10,7 +10,7 @@ class LinkClient {
   channel: any = null;
   public handleServiceMessage: any = null;// 发回client的消息
   connected = false;
-
+  config:any ={ host: '', port: 0}
   constructor(autoInit: boolean = true) {
     console.log("[INFO][cli.idx.constructor]");
     if (autoInit) {
@@ -20,6 +20,8 @@ class LinkClient {
 
   init = async (host: string = '', port: number = 0) => {
     console.log("[INFO][cli.idx.init]");
+    if( host != this.config.host) this.config.host = host;
+    if( port != this.config.port) this.config.port = port;
     this.channel = getChannel(this._handleMessage, host, port)
     await wait(50);
     if (this.connected) client_global.init();
@@ -43,17 +45,18 @@ class LinkClient {
 
   close = () => {
     console.log("[INFO][cli.idx.close]");
-    if (this.connected && this.channel) this.channel.close();
+    //if (this.connected && this.channel) this.channel.close();
     this.connected = false;
     this.handleServiceMessage = null;
+    closeChannel();
   }
 
   refresh = async () => {
     console.log("[INFO][cli.idx.refresh]");
-    this.channel.refresh();
-    //this.close();
-    // await wait(40);
-    //this.init();
+    //this.channel.refresh();
+    this.close();
+    await wait(40);
+    this.init(this.config.host,this.config.port);
     await wait(80);
     return this.connected;
   }
