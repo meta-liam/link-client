@@ -22,7 +22,7 @@ class LinkClient {
     console.log("[INFO][cli.idx.init]");
     if( host != this.config.host) this.config.host = host;
     if( port != this.config.port) this.config.port = port;
-    this.channel = getChannel(this._handleMessage, host, port)
+    this.channel = getChannel(this._handleMessage, host, port,true);
     await wait(50);
     if (this.connected) client_global.init();
     return this.connected;

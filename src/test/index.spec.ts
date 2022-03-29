@@ -59,15 +59,21 @@ describe("LinkClient:all", () => {
     await wait(80);
   });
 
-  it("close:all", async () => {
+  // it("close:all", async () => {
+  //   const client = new LinkClient(false);
+  //   client.init("", 8888);
+  //   await wait(50);
+  //   console.log("client.connected 1:", client.connected);
+  //   client.close();
+  //   expect(client.connected).toEqual(false);
+  //   console.log("client.connected 2:", client.connected);
+  //   await wait(150);
+  // });
+
+  it("close:A", async () => {
     const client = new LinkClient(false);
-    client.init("", 8888);
-    await wait(50);
-    console.log("client.connected 1:", client.connected);
     client.close();
     expect(client.connected).toEqual(false);
-    console.log("client.connected 2:", client.connected);
-    await wait(150);
   });
 
   it("refresh:all", async () => {
