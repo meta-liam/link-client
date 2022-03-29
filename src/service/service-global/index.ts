@@ -10,7 +10,7 @@ const getVersion = async (): Promise<string> => {
   return await getChannel().send(r.method, r.params, r.service);
 }
 
-const init = async (config: string = ""): Promise<string> => {
+const init = async (config: any = {version:"0.0.0"}): Promise<string> => {
   let r = { "method": "init", "params": [config], "service": "service-global" }
   return await getChannel().send(r.method, r.params, r.service);
 }
@@ -25,4 +25,11 @@ const listen = async (onData: (data: string) => void, num: number = 5, ms: numbe
   return await getChannel().send(r.method, r.params, r.service);
 }
 
-export default { init, getVersion, askAndAnswer,listen };
+const close = async (): Promise<string> => {
+  if (!connected) await wait(80);
+  let r = { "method": "close", "params": [""], "service": "service-global" }
+  connected = true;
+  return await getChannel().send(r.method, r.params, r.service);
+}
+
+export default { init, getVersion, askAndAnswer,listen ,close};
