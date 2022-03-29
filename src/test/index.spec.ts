@@ -38,7 +38,7 @@ describe("LinkClient:all", () => {
 
   it("getService:", async () => {
     const client = new LinkClient("",8888,false);
-    let sv = client.getExtensionService("client-global");
+    let sv = client.getExtension("client-global");
     console.log("sv.version::",sv.getVersion());
     //expect(sv.getVersion()).not.toEqual(null);
   });

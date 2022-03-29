@@ -16,11 +16,13 @@ describe("service-global:all", () => {
   });
 
   const _handle = (v: any) => {
-    console.log("[TEST]handle-Back:", JSON.stringify(v));
+    //console.log("[TEST]handle-Back:", JSON.stringify(v));
+    if(v)return ;
   }
 
   const _handleSend = (v: any) => {
-    console.log("[TEST]_handleSend:", JSON.stringify(v));
+    //console.log("[TEST]_handleSend:", JSON.stringify(v));
+    if(v)return ;
   }
 
   //send:{"jsonrpc":"2.0","method":"getVersion","params":[""],"id":199,"service":"service-global"}

@@ -1,40 +1,46 @@
 import { wait } from '../../utils';
 import { getChannel } from '../../channel'
+import sv from '../../service/service-global/index'
 
 const version = '1.0.1';
 let connected = false;
 
-function getVersion(): string {
+const getVersion = (): string => {
   return version;
 }
 
-function init(config: string = ""): string {
-  getChannel().setHandle(_handle,"client-global");//绑定handle(非必要)
+const init = (config: string = ""): string => {
+  if (!connected) getChannel().setHandle(_handle, "client-global");//绑定handle
+  sv.init(JSON.stringify({ version }));//服务端init
   return `${config || 'ok'}`;
 }
-const close =()=>{
-  getChannel().setHandle(null,"client-global");
+
+const close = () => {
+  connected = false;
+  getChannel().setHandle(null, "client-global");
 }
 
-const _handle =(v:any)=>{
-  console.log("[INFO][ext.client-global._handle]:", v);
-  if (v && v.type=="data" && v.data.method == "notifyMessage"){
-    _notifyMessage(v.data);
+// {"type":"data","data":{"jsonrpc":"2.0","method":"notifyMessage","params":{"type":"websocket.open","open":true},"client":"client-global"}}
+const _handle = (v: any) => {
+  //console.log("[INFO][cli.ext.global._handle]:", v);
+  if (!connected) connected = true;
+  //处理 service 主动请求
+  if (v && v.type == "data" && v.data.client == "client-global") {
+    _notify(v.data);
   }
 }
 
-const getServiceVersion = async () => {
-  if (!connected) await wait(80);
-  let r = { "method": "getVersion", "params": [""], "service": "service-global" }
-  connected = true;
-  return await getChannel().send(r.method, r.params, r.service);
+// 处理服务端请求业务
+const _notify = (v: any) => {
+  console.log("[INFO][cli.ext.global.notify]:", v);
+  if (v && v.method === "notifyMessage") {
+    console.log('[INFO][client.ext.global._notifyMessage:]', v.params);
+  }
+  else if (v && v.method === "init") {
+    console.log("INIT");
+    init(v.params)
+  }
 }
 
-const _notifyMessage =(v:any)=>{
-  console.log("[INFO][client.notifyMessage]:::", v);
-  // if (v && v.params&& v.params[0].type=="websocket.open"){
-  //   console.log('[INFO][client.ext.global._notifyMessage.websocket.open]');
-  // }
-}
 
-export default { init, getVersion, getServiceVersion };
+export default { init, getVersion, close };

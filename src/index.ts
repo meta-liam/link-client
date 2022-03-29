@@ -8,6 +8,7 @@ import discovery from './extension/discovery/index'
 class LinkClient {
   channel: any = null;
   public handleServiceMessage: any = null;// 发回client的消息
+  connected = false;
 
   constructor(host: string = '', port: number = 0, autoInit: boolean = true) {
     console.log("[INFO][cli.idx.constructor]");
@@ -20,11 +21,13 @@ class LinkClient {
     console.log("[INFO][cli.idx.init]");
     this.channel = getChannel(this._handleMessage, host, port)
     await wait(20);
+    return this.connected;
   }
 
   _handleMessage = (v: any) => {
     //console.log("[INFO][cli._handleMessage]", v);
     if (this.handleServiceMessage) this.handleServiceMessage(v);
+    if(!this.connected)this.connected =true;
   };
 
   setHandle = (handle: any) => {
