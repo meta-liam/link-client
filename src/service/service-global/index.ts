@@ -1,12 +1,7 @@
-import { wait } from '../../utils';
 import { getChannel } from '../../channel'
 
-let connected = false;
-
 const getVersion = async (): Promise<string> => {
-  if (!connected) await wait(80);
   let r = { "method": "getVersion", "params": [""], "service": "service-global" }
-  connected = true;
   return await getChannel().send(r.method, r.params, r.service);
 }
 
@@ -26,9 +21,7 @@ const listen = async (onData: (data: string) => void, num: number = 5, ms: numbe
 }
 
 const close = async (): Promise<string> => {
-  if (!connected) await wait(80);
   let r = { "method": "close", "params": [""], "service": "service-global" }
-  connected = true;
   return await getChannel().send(r.method, r.params, r.service);
 }
 
