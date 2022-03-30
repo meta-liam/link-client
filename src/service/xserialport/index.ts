@@ -20,18 +20,18 @@ const createPort = async (option:any,callback: (type: string,data:any) => void) 
   return await getChannel().send(r.method, r.params, r.service);
 }
 
-const write = async (path: string, arr: Buffer | string) => {
-  let r = { "method": "getVersion", "params": [path,arr], "service": "xserialport" }
+const write = async (path: string, arr: Array<number>) => {
+  let r = { "method": "write", "params": [path,arr], "service": "xserialport" }
   return await getChannel().send(r.method, r.params, r.service);
 }
 
 const close = async (path: string) => {
-  let r = { "method": "getVersion", "params": [path], "service": "xserialport" }
+  let r = { "method": "close", "params": [path], "service": "xserialport" }
   return await getChannel().send(r.method, r.params, r.service);
 }
 
 const closeAllPorts = async () => {
-  let r = { "method": "getVersion", "params": [""], "service": "xserialport" }
+  let r = { "method": "closeAllPorts", "params": [""], "service": "xserialport" }
   return await getChannel().send(r.method, r.params, r.service);
 }
 
