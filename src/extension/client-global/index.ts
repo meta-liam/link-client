@@ -1,4 +1,3 @@
-import { wait } from '../../utils';
 import { getChannel } from '../../channel'
 import sv from '../../service/service-global/index'
 
@@ -22,7 +21,11 @@ const close = () => {
 
 const _handle = (v: any) => {
   //console.log("[INFO][cli.ext.global._handle]:", v);
-  if (!connected) connected = true;
+  if (v && v.type == "data" && v.data.params.type == 'websocket.close') {
+    connected = false;
+  } else {
+    if (!connected) connected = true;
+  }
   //处理 service 主动请求
   if (v && v.type == "data" && v.data.client == "client-global") {
     _notify(v.data);

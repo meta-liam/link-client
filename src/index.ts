@@ -3,9 +3,11 @@ import { wait } from './utils'
 import { getChannel,closeChannel } from './channel'
 //service
 import service_global from './service/service-global/index'
+import discovery from './service/discovery/index'
+
 //extension
 import client_global from './extension/client-global/index'
-import discovery from './extension/discovery/index'
+
 class LinkClient {
   channel: any = null;
   public handleServiceMessage: any = null;// 发回client的消息
@@ -62,7 +64,8 @@ class LinkClient {
   }
 
   getService = (name: string) => {
-    if (name == "service-global") return service_global;
+    if (name === "service-global") return service_global;
+    else if (name === "discovery") return discovery;
     // const sv = require(`./service/${name}/index`);
     // if (sv) return sv.default;
     else return null;
@@ -70,7 +73,6 @@ class LinkClient {
 
   getExtension = (name: string) => {
     if (name == "client-global") return client_global;
-    else if (name == "discovery") return discovery;
     // const sv = require(`./extension/${name}/index`);
     // if (sv) return sv.default;
     else return null;

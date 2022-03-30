@@ -12,12 +12,12 @@ describe("LinkClient:all", () => {
   })
 
   const _handle = (v: any) => {
-    console.log("[TEST]handle-Back:", JSON.stringify(v));
+    //console.log("[TEST]handle-Back:", JSON.stringify(v));
     if (v) return;
   }
 
   const _handleSend = (v: any) => {
-    console.log("[TEST]_handleSend:", JSON.stringify(v));
+    //console.log("[TEST]_handleSend:", JSON.stringify(v));
     if (v) return;
   }
 
@@ -80,23 +80,25 @@ describe("LinkClient:all", () => {
     const client = new LinkClient(false);
     client.init("", 8888);
     await wait(80);
-    console.log("port 1:", client.channel.Config.PC.port, client.connected);
+    //console.log("port 1:", client.channel.Config.PC.port, client.connected);
     client.refresh();
     await wait(180);
-    console.log("port 2:", client.channel.Config.PC.port, client.connected);
+    //console.log("port 2:", client.channel.Config.PC.port, client.connected);
     expect(client.channel.Config.PC.port).toEqual(8888);
     await wait(80);
   });
 
 
-  it("getService:", async () => {
+  it("getService.service-global:", async () => {
     const client = new LinkClient(false);
+    client.init('', 8888);
     let sv = client.getService("service-global");
-    console.log("sv.version::", sv.getVersion());
+    //console.log("sv.version::", sv);
     //expect(sv.getVersion()).not.toEqual(null);
+    await wait(80);
   });
 
-  it("getExtension:", async () => {
+  it("getExtension.client-global:", async () => {
     const client = new LinkClient(false);
     let sv = client.getExtension("client-global");
     console.log("sv.version::", sv.getVersion());

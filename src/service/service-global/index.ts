@@ -1,11 +1,11 @@
 import { getChannel } from '../../channel'
 
-const getVersion = async (): Promise<string> => {
+const getVersion = async ()=> {
   let r = { "method": "getVersion", "params": [""], "service": "service-global" }
   return await getChannel().send(r.method, r.params, r.service);
 }
 
-const init = async (config: any = {version:"0.0.0"}): Promise<string> => {
+const init = async (config: any = "") => {
   let r = { "method": "init", "params": [config], "service": "service-global" }
   return await getChannel().send(r.method, r.params, r.service);
 }
