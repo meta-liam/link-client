@@ -22,7 +22,7 @@ describe("LinkClient:all", () => {
   }
 
   it("init:true", () => {
-    const client = new LinkClient();
+    const client = new LinkClient(true);
     expect(client.init).toBeDefined();
     expect(global.LINK_CHANNEL).toBeDefined();
   });
@@ -49,7 +49,7 @@ describe("LinkClient:all", () => {
   });
 
   it("init:setHandle", async () => {
-    const client = new LinkClient();
+    const client = new LinkClient(true);
     let _handleMessage = jest.fn((v) => {
       //console.log("v:::",v);
       if (v) return;

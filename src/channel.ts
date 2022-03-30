@@ -1,4 +1,4 @@
-import LinkChannel from 'link-node';
+import LinkChannel from 'link-node' //'@makeblock/xlink-channel' //'link-node';
 
 const _global = (window /* browser */ || global /* node */) as any
 

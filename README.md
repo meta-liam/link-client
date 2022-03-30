@@ -17,8 +17,8 @@ import LinkClient from 'link-client';
 //import LinkClient from '../dist/index';
 
 async function start(){
-  const client = new LinkClient(false);
-  await client.init("localhost", 8888);
+  const client = new LinkClient();
+  await client.init();
 
   if (client.connected){
     console.log("设备初始化成功！");

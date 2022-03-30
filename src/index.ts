@@ -13,7 +13,7 @@ class LinkClient {
   public handleServiceMessage: any = null;// 发回client的消息
   connected = false;
   config:any ={ host: '', port: 0}
-  constructor(autoInit: boolean = true) {
+  constructor(autoInit: boolean = false) {
     console.log("[INFO][cli.idx.constructor]");
     if (autoInit) {
       this.init();
