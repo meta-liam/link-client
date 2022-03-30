@@ -29,9 +29,9 @@ class LinkClient {
   }
 
   _handleMessage = (v: any) => {
-    console.log("[INFO][cli._handleMessage]", v);
+    //console.log("[INFO][cli._handleMessage]", v);
     if (this.handleServiceMessage) this.handleServiceMessage(v);
-    if (v && v.type == "data" && v.data && v.data.params && v.data.params.type == 'websocket.close') {
+    if (v && v.type == "data" && v.data.params.type == 'websocket.close') {
       this.connected = false;
     } else {
       if (!this.connected) this.connected = true;
@@ -63,7 +63,7 @@ class LinkClient {
 
   getService = (name: string) => {
     if (name == "service-global") return service_global;
-    // const sv = require(`./extension/${name}/index`);
+    // const sv = require(`./service/${name}/index`);
     // if (sv) return sv.default;
     else return null;
   }
