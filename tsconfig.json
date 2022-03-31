@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-      "declaration": false,
+      "declaration": true, // true
       "removeComments": true,
       "rootDir": "./src",
       "sourceMap": true,
@@ -8,7 +8,7 @@
       "moduleResolution": "node",
       "esModuleInterop": true,
       "lib": [
-    "dom",
+          "dom",
           "esnext"
   ],
       "target": "es2015",
